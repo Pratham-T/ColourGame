@@ -2,17 +2,32 @@
 <html>
     <head>
         <title>Guess the colour</title>
+        <link rel="stylesheet" href=".\index.css" \>
+        <link rel="preconnect" href="https://fonts.gstatic.com"\>
+        <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet"\>
     </head>
     <body>
-        <div id="header"></div>
-        <div class="tile" id=1></div>
-        <div class="tile" id=2></div>
-        <div class="tile" id=3></div>
-        <div class="tile" id=4></div>
-        <div class="tile" id=5></div>
-        <div class="tile" id=6></div>
-        <div id="footer">
-            <div id="new_game"></div>
+        <div id="header">
+            <h1 id="heading"><u>The Great Colour Guessing Game</u></h1><br/>
+            <h2>RGB (xxx,xxx,xxx)</h2>
+            <h3>Select the correct colour whose code is this</h3>
         </div>
+        <div id="options">
+            <div class="tile" id="1"></div>
+            <div class="tile" id="2"></div>
+            <div class="tile" id="3"></div>
+            <div class="tile" id="4"></div>
+            <div class="tile" id="5"></div>
+            <div class="tile" id="6"></div>
+        </div>
+        <div id="footer">
+            <div id="new_game"><button id="new_game_button" type="button" onclick=new_game()>New Game</button></div>
+        </div>
+
+        <script type="javascript">
+            function new_game() {
+                
+            }
+        </script>
     </body>
 </html>
