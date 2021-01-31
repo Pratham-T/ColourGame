@@ -1,6 +1,6 @@
 # ColourGame
 
-Simple Colour Guessing Game made on HTML/CSS/JS where the player has to guess the colour from Hex codes. 
+Simple Colour Guessing Game made on HTML/CSS/JS where the player has to guess the colour from RCB codes. 
 
 Enjoy!
 

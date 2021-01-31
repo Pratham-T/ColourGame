@@ -21,7 +21,12 @@
     height: 200px;
     width: 200px; 
     margin: 20px;
-    border-radius: 20px; 
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.tile:hover{
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 7.5px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 

@@ -9,7 +9,7 @@
     <body>
         <div id="header">
             <h1 id="heading"><u>The Great Colour Guessing Game</u></h1><br/>
-            <h2>RGB (xxx,xxx,xxx)</h2>
+            <h2 id="colorCode">RGB (xxx,xxx,xxx)</h2>
             <h3>Select the correct colour whose code is this</h3>
         </div>
         <div id="options">
@@ -24,10 +24,56 @@
             <div id="new_game"><button id="new_game_button" type="button" onclick=new_game()>New Game</button></div>
         </div>
 
-        <script type="javascript">
-            function new_game() {
-                
+        <script>
+
+            var t = [];
+            for (let i = 0; i < 6; i++) {
+                t[i] = document.getElementById((i+1).toString());
             }
+
+            var correctOpt = -1, correctColor = "rgb (0, 0, 0)";
+            
+            function getRandomColor() {
+                var letters = "0123456789ABCDEF";
+                var color = "#";
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+            
+            function new_game() {
+                for(let i =0; i<6; i++){
+                    t[i].style.background = getRandomColor();
+                }
+                
+                correctOpt = Math.floor(Math.random()*6);
+                correctColor = t[correctOpt].style.background;
+                
+                document.getElementById("colorCode").innerHTML = correctColor;
+                console.log(correctColor);       
+            }
+            
+            function afterClick(){
+                if(this.style.background == correctColor){
+                    for(var i=0; i<6; i++){
+                        if(this.id == t[i].id)
+                            continue;
+                        else
+                            t[i].style.background = correctColor;
+                    }
+                }
+                else{
+                    this.style.background = "black";
+                }
+            }
+            
+            for(var i =0; i<6; i++){
+                t[i].addEventListener("click", afterClick);
+            }
+            
+            
         </script>
     </body>
 </html>
