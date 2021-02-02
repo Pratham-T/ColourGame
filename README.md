@@ -12,7 +12,7 @@ Instructions:
 7. After each round, click continue to go to next round.
 8. ps: If you keep guessing correctly, the game is infinite with no exit button :p .
 
-Access the game at: [Guess the colour](pratham-t.github.io/ColourGame)
+Access the game at: [Guess the colour](https://pratham-t.github.io/ColourGame)
 
 Enjoy!
 
