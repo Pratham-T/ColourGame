@@ -3,6 +3,13 @@
     padding: 0pt;
 }
 
+body{
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    justify-content: space-evenly, stretch;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
 #header{
     background-color: blueviolet;
     text-align: center;
@@ -16,12 +23,11 @@
 }
 
 .tile{
-    background-color: lightcoral;
+    background-color: black;
     display: grid;
     height: 200px;
     width: 200px; 
     margin: 20px;
-    border-radius: 20px;
     cursor: pointer;
 }
 
@@ -39,13 +45,26 @@
 }
 
 #footer{
-    background-color: #127892;
-    display: flex;
-    justify-content: center;
+    background-color: #222222;
+    color: #ffffff;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 4px;
+    width: 100%;
+    text-align: center;
+    justify-content: stretch;
     align-items: center ;
-    margin-top: 24px;
+    padding: 1vh;
+    bottom: 0;
+    overflow: hidden;
+    position: fixed;
 }
 
+#stats{
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    margin-bottom: 2px;
+}
 
 #new_game_button{
     size: auto;
@@ -55,6 +74,10 @@
     border-radius: 10px;
 }
 
-button{
-    border-radius: 10px;
+.stat{
+    size:unset;
+    font-size: 30px;
+    padding: 2px 4px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 #afafaf;
 }

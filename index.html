@@ -5,12 +5,13 @@
         <link rel="stylesheet" href=".\index.css" \>
         <link rel="preconnect" href="https://fonts.gstatic.com"\>
         <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet"\>
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet"\>
     </head>
     <body>
         <div id="header">
             <h1 id="heading"><u>The Great Colour Guessing Game</u></h1><br/>
-            <h2 id="colorCode">RGB (xxx,xxx,xxx)</h2>
-            <h3>Select the correct colour whose code is this</h3>
+            <h3>Select the correct colour whose code is</h3>
+            <h2 id="colorCode">rgb (xxx,xxx,xxx)</h2>
         </div>
         <div id="options">
             <div class="tile" id="1"></div>
@@ -21,6 +22,12 @@
             <div class="tile" id="6"></div>
         </div>
         <div id="footer">
+            <div id="stats">
+                <div id="tries"><h1> Attempts left: <button type="menu" class="stat" id="attempts"> 3 </button></h1></div>
+                <div id="score"><h1> Score: <button type="menu" class="stat" id="total"> 0 </button></h1></div>
+                <div id="round"><h1> Round: <button type="menu" class="stat" id="roundNo"> 1 </button></h1></div>
+            </div>
+            <div id="Msg"><h3 id="gMsg">Press New Game to Begin!</h3></div>
             <div id="new_game"><button id="new_game_button" type="button" onclick=new_game()>New Game</button></div>
         </div>
 
@@ -32,11 +39,17 @@
             }
 
             var correctOpt = -1, correctColor = "rgb (0, 0, 0)";
+            var attempts = 3;
+            var score = 0;
+            var round = 1;
+            var gameStatus = 1;     //to detect Game Over situation
+
+            //function to get random colours in hexadecimal format
             
             function getRandomColor() {
                 var letters = "0123456789ABCDEF";
                 var color = "#";
-                for (var i = 0; i < 6; i++) {
+                for (let i = 0; i < 6; i++) {
                     color += letters[Math.floor(Math.random() * 16)];
                 }
                 return color;
@@ -47,29 +60,74 @@
                 for(let i =0; i<6; i++){
                     t[i].style.background = getRandomColor();
                 }
-                
+                attempts = 3;
+
+                if (gameStatus == 0) {
+                    score = 0;
+                    round = 1;
+                    document.getElementById("total").innerHTML = score;
+                }
+                gameStatus = 1;
+                document.getElementById("roundNo").innerHTML = round;
+                document.getElementById("attempts").innerHTML = attempts;
+                document.getElementById("gMsg").innerHTML = "Start Guessing!";
+                document.getElementById("new_game_button").innerHTML = "New Game";
+
                 correctOpt = Math.floor(Math.random()*6);
                 correctColor = t[correctOpt].style.background;
                 
-                document.getElementById("colorCode").innerHTML = correctColor;
-                console.log(correctColor);       
+                document.getElementById("colorCode").innerHTML = correctColor;       
             }
             
             function afterClick(){
-                if(this.style.background == correctColor){
-                    for(var i=0; i<6; i++){
-                        if(this.id == t[i].id)
-                            continue;
+                if(correctOpt != -1 && gameStatus!= -1){
+                    if(this.style.background == correctColor && attempts>0){
+                        conGame();
+                        for(let i=0; i<6; i++){
+                            if(this.id == t[i].id)
+                                continue;
+                            else
+                                t[i].style.background = correctColor;
+                        }
+                    }
+                    else if(attempts<=0){
+                        document.getElementById("gMsg").innerHTML = "GAME OVER!";
+                    }
+                    else{
+                        this.style.background = "black";
+                        attempts --;
+                        if(attempts == 0){
+                            document.getElementById("gMsg").innerHTML = "GAME OVER!";
+                            endGame();
+                            for(let i=0; i<6; i++)
+                                if (t[i].style.background != correctColor) {
+                                    t[i].style.background = "transparent";                               
+                                }
+                        }
                         else
-                            t[i].style.background = correctColor;
+                            document.getElementById("gMsg").innerHTML = "Keep Guessing...";
+                        document.getElementById("attempts").innerHTML = attempts;
                     }
                 }
-                else{
-                    this.style.background = "black";
-                }
+            }
+
+            function conGame(){
+                document.getElementById("new_game_button").innerHTML = "Continue";
+                score = score + 10*attempts;
+                round++;
+                document.getElementById("total").innerHTML = score;
+                document.getElementById("gMsg").innerHTML = "Continue to next round!";
+                gameStatus = -1;
+            }
+
+            function endGame(){
+                document.getElementById("new_game_button").innerHTML = "New Game";
+                gameStatus = 0;
             }
             
-            for(var i =0; i<6; i++){
+            // Event listener for detecting clicks or taps
+
+            for(let i =0; i<6; i++){
                 t[i].addEventListener("click", afterClick);
             }
             
