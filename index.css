@@ -5,8 +5,8 @@
 
 body{
     display: grid;
-    grid-template-rows: auto auto 1fr;
-    justify-content: space-evenly, stretch;
+    grid-template-rows: auto auto auto;
+    justify-content: stretch;
     font-family: 'Josefin Sans', sans-serif;
 }
 
@@ -75,7 +75,7 @@ body{
 }
 
 .stat{
-    size:unset;
+    size: unset;
     font-size: 30px;
     padding: 2px 4px;
     border-radius: 5px;

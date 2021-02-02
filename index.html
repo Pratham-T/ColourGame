@@ -42,7 +42,7 @@
             var attempts = 3;
             var score = 0;
             var round = 1;
-            var gameStatus = 1;     //to detect Game Over situation
+            var gameStatus = 1;     //to detect Game Over or continue to next round situation.
 
             //function to get random colours in hexadecimal format
             
@@ -55,14 +55,15 @@
                 return color;
             }
 
-            
+            //function to set up tile colours and change stats for each round
             function new_game() {
                 for(let i =0; i<6; i++){
+                    t[i].style.visibility = "visible";
                     t[i].style.background = getRandomColor();
                 }
                 attempts = 3;
 
-                if (gameStatus == 0) {
+                if (gameStatus != -1) {
                     score = 0;
                     round = 1;
                     document.getElementById("total").innerHTML = score;
@@ -79,29 +80,31 @@
                 document.getElementById("colorCode").innerHTML = correctColor;       
             }
             
+            //The main "logic" function behind deciding the course of action after a click
             function afterClick(){
-                if(correctOpt != -1 && gameStatus!= -1){
+                if(correctOpt != -1 && gameStatus== 1){
                     if(this.style.background == correctColor && attempts>0){
                         conGame();
                         for(let i=0; i<6; i++){
                             if(this.id == t[i].id)
                                 continue;
                             else
+                            {
+                                t[i].style.visibility = "visible";
                                 t[i].style.background = correctColor;
+                            }
                         }
                     }
-                    else if(attempts<=0){
-                        document.getElementById("gMsg").innerHTML = "GAME OVER!";
-                    }
+                    
                     else{
-                        this.style.background = "black";
+                        this.style.visibility = "hidden";
                         attempts --;
                         if(attempts == 0){
                             document.getElementById("gMsg").innerHTML = "GAME OVER!";
                             endGame();
                             for(let i=0; i<6; i++)
                                 if (t[i].style.background != correctColor) {
-                                    t[i].style.background = "transparent";                               
+                                    t[i].style.visibility = "hidden";                               
                                 }
                         }
                         else
